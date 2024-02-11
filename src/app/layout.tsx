@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Red_Hat_Display } from 'next/font/google'
 import './globals.css'
-import { Header } from './header'
 
 const redhatdisplay = Red_Hat_Display({ subsets: ['latin'] })
 
@@ -18,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${redhatdisplay.className} "px-[50%]"`}>
-        <Header />
         {children}
       </body>
     </html>
