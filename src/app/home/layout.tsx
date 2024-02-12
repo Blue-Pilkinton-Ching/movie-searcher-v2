@@ -35,7 +35,7 @@ export default function Layout({
     <div className="px-[5%]">
       <Header search={search} />
       {searchLoading ? (
-        <p className="text-4xl">Searching for {searchText}...</p>
+        <p className="text-2xl font-bold">Searching for {searchText}...</p>
       ) : searchResults ? (
         <>
           <br />
