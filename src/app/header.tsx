@@ -1,17 +1,25 @@
 'use client'
 
+import { ChangeEvent, useState } from 'react'
+
 interface HeaderProps {
   search: (search: string) => void
 }
 
 export function Header(props: HeaderProps) {
-  async function onSearch(event: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if (event.key === 'Enter') {
-      event.preventDefault()
-    }
+  const [searchValue, setSearchValue] = useState('')
+
+  function onChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    setSearchValue(event.currentTarget.value)
 
     if (event.currentTarget.value.trim()) {
       props.search(event.currentTarget.value)
+    }
+  }
+
+  function onKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (event.key === 'Enter') {
+      event.preventDefault()
     }
   }
 
@@ -22,7 +30,9 @@ export function Header(props: HeaderProps) {
       </div>
       <div className="w-full px-[5%]">
         <textarea
-          onKeyDown={onSearch}
+          value={searchValue}
+          onKeyDown={onKeyDown}
+          onChange={onChange}
           className="flex-grow bg-neutral-900 h-10 resize-none focus:outline-none rounded line py-1.5 overflow-hidden px-5 text-lg"
           name="search"
           cols={1}

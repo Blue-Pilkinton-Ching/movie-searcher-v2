@@ -10,9 +10,13 @@ export default function Layout({
 }>) {
   const [searchLoading, setSearchLoading] = useState(false)
   const [searchResults, setSearchResults] = useState('')
+  const [searchText, setSearchText] = useState('')
 
   function search(search: string) {
+    console.log(search)
+
     setSearchLoading(true)
+    setSearchText(search)
 
     fetch(`/api/search/${search}`).then(async (res) => {
       res.text().then((text) => {
@@ -24,8 +28,16 @@ export default function Layout({
 
   return (
     <>
-      <Header search={search} />
-      {searchLoading ? <p>Loading...</p> : searchResults ? searchResults : ''}
+      <main className="flex min-h-screen flex-col items-center justify-between">
+        <Header search={search} />
+        {searchLoading ? (
+          <p>Searching for {searchText}...</p>
+        ) : searchResults ? (
+          searchResults
+        ) : (
+          children
+        )}
+      </main>
     </>
   )
 }
