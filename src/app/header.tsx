@@ -33,7 +33,7 @@ export function Header(props: HeaderProps) {
           value={searchValue}
           onKeyDown={onKeyDown}
           onChange={onChange}
-          className="flex-grow bg-neutral-900 h-10 resize-none focus:outline-none rounded line py-1.5 overflow-hidden px-5 text-lg"
+          className="flex-grow bg-neutral-700/40 h-10 resize-none focus:outline-none rounded line py-1.5 overflow-hidden px-5 text-lg"
           name="search"
           cols={1}
           rows={1}

@@ -4,19 +4,23 @@ import { useWindowSize } from '@uidotdev/usehooks'
 
 export interface CardProps {
   data: Media
+  onSelect: (data: Media) => void
 }
 
-export function Card({ data }: CardProps) {
+export function Card({ data, onSelect }: CardProps) {
   return (
-    <div className="max-w-[154px]">
-      <div
-        className={`w-[40vw] max-w-[154px] aspect-[2/3] rounded hover:cursor-pointer hover:brightness-75 hover:duration-300 `}
-      >
+    <button
+      onClick={() => onSelect(data)}
+      className="max-w-[154px] hover:cursor-pointer hover:brightness-75 hover:duration-300"
+    >
+      <div className={`w-[40vw] max-w-[154px] aspect-[2/3] *:rounded-md`}>
         {data.poster_path == null ? (
-          `null`
+          <div className="w-full h-full bg-neutral-500/10 text-center flex">
+            <p className="px-5 my-auto">Couldn&apos;t find Image</p>
+          </div>
         ) : (
           <Image
-            className="w-full h-full rounded shadow-md"
+            className="w-full h-full shadow-md"
             src={`https://image.tmdb.org/t/p/w${154}/${data.poster_path}`}
             alt={`${data.title ? data.title : data.name} poster`}
             width={154}
@@ -37,6 +41,6 @@ export function Card({ data }: CardProps) {
         </p>
         <br />
       </div>
-    </div>
+    </button>
   )
 }
