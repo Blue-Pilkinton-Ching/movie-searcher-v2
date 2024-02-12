@@ -33,7 +33,7 @@ export default function Layout({
       {searchLoading ? (
         <p className="text-4xl">Searching for {searchText}...</p>
       ) : searchResults ? (
-        <main className="flex min-h-screen flex-wrap justify-between">
+        <main className="flex flex-wrap gap-5 justify-evenly ">
           {searchResults.results.map((element, index) => {
             return <Card key={index} data={element} />
           })}

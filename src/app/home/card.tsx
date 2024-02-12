@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Media } from '../../../interfaces'
+import { useWindowSize } from '@uidotdev/usehooks'
 
 export interface CardProps {
   data: Media
@@ -7,7 +8,9 @@ export interface CardProps {
 
 export function Card({ data }: CardProps) {
   return (
-    <div className="w-[154px] h-[231px] rounded">
+    <div
+      className={`w-[40vw] max-w-[154px] h-auto rounded hover:cursor-pointer hover:duration-300:brightness-75 `}
+    >
       {data.poster_path == null ? (
         `null`
       ) : (
