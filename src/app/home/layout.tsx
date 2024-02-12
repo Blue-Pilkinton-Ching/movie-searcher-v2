@@ -21,7 +21,11 @@ export default function Layout({
 
     fetch(`/api/search/${search}`).then(async (res) => {
       res.text().then((text) => {
-        setSearchResults(JSON.parse(text))
+        let media = JSON.parse(text) as MediaList
+
+        media.results = media.results.filter((x) => x.media_type != 'person')
+
+        setSearchResults(media)
         setSearchLoading(false)
       })
     })
@@ -33,11 +37,14 @@ export default function Layout({
       {searchLoading ? (
         <p className="text-4xl">Searching for {searchText}...</p>
       ) : searchResults ? (
-        <main className="flex flex-wrap gap-5 justify-evenly ">
-          {searchResults.results.map((element, index) => {
-            return <Card key={index} data={element} />
-          })}
-        </main>
+        <>
+          <br />
+          <main className="flex flex-wrap gap-5 sm:gap-8 justify-evenly ">
+            {searchResults.results.map((element, index) => {
+              return <Card key={index} data={element} />
+            })}
+          </main>
+        </>
       ) : (
         children
       )}
