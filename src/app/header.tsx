@@ -24,9 +24,9 @@ export function Header(props: HeaderProps) {
   }
 
   return (
-    <header className="w-full h-fit min-h-24 flex items-center lg:justify-between flex-col *:h-full *:flex *:items-center lg:flex-row px-[5%]">
+    <header className="w-full h-fit min-h-24 flex items-center lg:justify-between flex-col *:h-full *:flex *:items-center lg:flex-row py-5">
       <div>
-        <div className="text-3xl p-5">Watchalot</div>
+        <div className="text-3xl py-5">Watchalot</div>
       </div>
       <div className="w-full px-[5%]">
         <textarea
