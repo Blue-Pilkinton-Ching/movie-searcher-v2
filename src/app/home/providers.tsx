@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { GlobalStateContext } from '../globalState'
 import { GlobalState } from '../../../interfaces'
