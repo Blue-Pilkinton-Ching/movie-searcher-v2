@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { GlobalState, Media } from '../../../interfaces'
-import { useWindowSize } from '@uidotdev/usehooks'
 import Link from 'next/link'
 import { useGlobalState } from '../globalState'
 
@@ -9,12 +8,12 @@ export interface CardProps {
 }
 
 export function Card({ data }: CardProps) {
-  const { globalState, setGlobalState } = useGlobalState()
+  const { setGlobalState } = useGlobalState()
 
   function onClick() {
     setGlobalState((oldState: GlobalState) => ({
       ...oldState,
-      currentMedia: null,
+      currentMedia: data,
     }))
   }
 
@@ -22,9 +21,7 @@ export function Card({ data }: CardProps) {
     <Link
       onClick={onClick}
       className="max-w-[154px] hover:cursor-pointer hover:brightness-75 hover:duration-300"
-      href={`/home/media/${data.media_type}/${encodeURIComponent(
-        (data.title ? data.title : data.name) as string
-      )}`}
+      href={`/home/media/${data.media_type}/${encodeURIComponent(data.id)}`}
     >
       <div className={`w-[40vw] max-w-[154px] aspect-[2/3] *:rounded-md`}>
         {data.poster_path == null ? (
