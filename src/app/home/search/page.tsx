@@ -5,7 +5,7 @@ import { MediaSearch } from '../../../../interfaces'
 import { Card } from '../card'
 import { useSearchParams } from 'next/navigation'
 
-export default function Page({ params }: { params: { search: string } }) {
+export default function Page() {
   const searchParams = useSearchParams()
 
   const search = searchParams.get('query') as string
@@ -25,17 +25,25 @@ export default function Page({ params }: { params: { search: string } }) {
   )
 }
 {
-  /* <p className="text-2xl font-bold">Couldn&apos;t find anything :(</p> */
 }
 
 export async function Search({ search }: { search: string }) {
-  const media = (await JSON.parse(
-    await (
-      await fetch(`/api/search?query=${encodeURIComponent(search)}`)
-    ).text()
-  )) as MediaSearch
+  let media
+  try {
+    media = (await JSON.parse(
+      await (
+        await fetch(`/api/search?query=${encodeURIComponent(search)}`)
+      ).text()
+    )) as MediaSearch
+  } catch (error) {
+    return <p className="text-2xl font-bold">Something went wrong :(</p>
+  }
 
   media.results = media.results.filter((x) => x.media_type != 'person')
+
+  if (media.results.length < 1) {
+    return <p className="text-2xl font-bold">Couldn&apos;t find anything :(</p>
+  }
 
   return (
     <>

@@ -1,9 +1,6 @@
 import { NextRequest } from 'next/server'
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { search: string } }
-) {
+export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams
   const query = searchParams.get('query') as string
 
