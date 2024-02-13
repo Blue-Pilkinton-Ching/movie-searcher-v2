@@ -1,10 +1,15 @@
+import { NextRequest } from 'next/server'
+
 export async function GET(
-  req: Request,
+  req: NextRequest,
   { params }: { params: { search: string } }
 ) {
+  const searchParams = req.nextUrl.searchParams
+  const query = searchParams.get('query') as string
+
   const request = new Request(
     `https://api.themoviedb.org/3/search/multi?query=${decodeURIComponent(
-      params.search
+      query
     )}&include_adult=${false}&language=en-US&page=${1}`,
     {
       headers: {

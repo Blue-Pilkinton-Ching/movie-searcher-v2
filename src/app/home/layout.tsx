@@ -18,7 +18,7 @@ export default function Layout({
 
     if (trim) {
       if (search !== searchText) {
-        router.push(`/home/search/${encodeURIComponent(search)}`)
+        router.push(`/home/search?query=${encodeURIComponent(search)}`)
       }
     } else {
       router.push(`/home`)
