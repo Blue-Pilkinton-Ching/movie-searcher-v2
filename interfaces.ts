@@ -1,4 +1,4 @@
-export interface MediaList {
+export interface MediaSearch {
   page: number
   results: Media[]
   total_pages: number
