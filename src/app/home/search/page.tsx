@@ -15,7 +15,7 @@ export default function Page({ params }: { params: { search: string } }) {
       <Suspense
         fallback={
           <p className="text-2xl font-bold">
-            Searching for {decodeURIComponent(params.search)}...
+            Searching for {decodeURIComponent(search)}...
           </p>
         }
       >
