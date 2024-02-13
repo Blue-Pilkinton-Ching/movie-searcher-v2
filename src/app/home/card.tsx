@@ -1,17 +1,17 @@
 import Image from 'next/image'
 import { Media } from '../../../interfaces'
 import { useWindowSize } from '@uidotdev/usehooks'
+import Link from 'next/link'
 
 export interface CardProps {
   data: Media
-  onSelect: (data: Media) => void
 }
 
-export function Card({ data, onSelect }: CardProps) {
+export function Card({ data }: CardProps) {
   return (
-    <button
-      onClick={() => onSelect(data)}
+    <Link
       className="max-w-[154px] hover:cursor-pointer hover:brightness-75 hover:duration-300"
+      href={'/home/media'}
     >
       <div className={`w-[40vw] max-w-[154px] aspect-[2/3] *:rounded-md`}>
         {data.poster_path == null ? (
@@ -41,6 +41,6 @@ export function Card({ data, onSelect }: CardProps) {
         </p>
         <br />
       </div>
-    </button>
+    </Link>
   )
 }

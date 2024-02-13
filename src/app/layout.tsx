@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${redhatdisplay.className} text-white gradient min-h-lvh`}
+        className={`${redhatdisplay.className} text-white gradient min-h-lvh px-[5%]`}
       >
         {children}
       </body>

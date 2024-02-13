@@ -12,9 +12,7 @@ export function Header(props: HeaderProps) {
   function onChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setSearchValue(event.currentTarget.value)
 
-    if (event.currentTarget.value.trim()) {
-      props.search(event.currentTarget.value)
-    }
+    props.search(event.currentTarget.value)
   }
 
   function onKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {

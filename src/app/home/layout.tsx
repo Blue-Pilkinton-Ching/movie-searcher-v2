@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Header } from '../header'
 import { Media, MediaList } from '../../../interfaces'
 import { Card } from './card'
-import { useWindowSize } from '@uidotdev/usehooks'
 
 export default function Layout({
   children,
@@ -14,66 +13,57 @@ export default function Layout({
   const [searchLoading, setSearchLoading] = useState(false)
   const [searchResults, setSearchResults] = useState<undefined | MediaList>()
   const [searchText, setSearchText] = useState('')
-  const [hideCards, setHideCards] = useState(false)
-
-  const { width } = useWindowSize()
 
   function search(search: string) {
-    setSearchLoading(true)
-    setSearchText(search)
+    const trim = search.trim()
 
-    fetch(`/api/search/${search}`).then(async (res) => {
-      res.text().then((text) => {
-        let media = JSON.parse(text) as MediaList
+    if (trim) {
+      if (trim !== searchText) {
+        setSearchLoading(true)
+        setSearchText(search)
 
-        media.results = media.results.filter((x) => x.media_type != 'person')
+        fetch(`/api/search/${search}`).then(async (res) => {
+          res.text().then((text) => {
+            let media = JSON.parse(text) as MediaList
 
-        setSearchResults(media)
-        setSearchLoading(false)
-      })
-    })
-  }
+            media.results = media.results.filter(
+              (x) => x.media_type != 'person'
+            )
 
-  function onCardSelected(data: Media) {
-    setHideCards(true)
+            setSearchResults(media)
+            setSearchLoading(false)
+          })
+        })
+      }
+    } else {
+      setSearchLoading(false)
+      setSearchText('')
+    }
   }
 
   return (
-    <div className="px-[5%]">
+    <>
       <Header search={search} />
-      <div className="flex">
-        <div className="w-full lg:w-[700]"></div>
-        <div
-          className={hideCards && width && width < 1024 ? 'hidden' : 'block'}
-        >
-          {searchLoading ? (
-            <p className="text-2xl font-bold">Searching for {searchText}...</p>
-          ) : searchResults ? (
-            searchResults.results.length > 0 ? (
-              <>
-                <br />
-                <main className="flex flex-wrap gap-5 sm:gap-8 justify-evenly ">
-                  {searchResults.results.map((element, index) => {
-                    return (
-                      <Card
-                        key={index}
-                        data={element}
-                        onSelect={onCardSelected}
-                      />
-                    )
-                  })}
-                </main>
-              </>
-            ) : (
-              <p className="text-2xl font-bold">
-                Couldn&apos;t find anything :(
-              </p>
-            )
+      <main className="w-full relative">
+        {searchLoading ? (
+          <p className="text-2xl font-bold">Searching for {searchText}...</p>
+        ) : searchResults && searchText ? (
+          searchResults.results.length > 0 ? (
+            <>
+              <br />
+              <div className="flex flex-wrap gap-5 sm:gap-8 justify-evenly ">
+                {searchResults.results.map((element, index) => {
+                  return <Card key={index} data={element} />
+                })}
+              </div>
+            </>
           ) : (
-            children
-          )}
-        </div>
-      </div>
-    </div>
+            <p className="text-2xl font-bold">Couldn&apos;t find anything :(</p>
+          )
+        ) : (
+          children
+        )}
+      </main>
+    </>
   )
 }
