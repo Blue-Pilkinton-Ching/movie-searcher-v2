@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react'
+
 export interface MediaSearch {
   page: number
   results: Media[]
@@ -25,4 +27,13 @@ export interface Media {
   original_title?: string
   release_date?: string
   video?: boolean
+}
+
+export interface GlobalState {
+  currentMedia: Media | null
+}
+
+export interface GlobalStateWrapper {
+  globalState: GlobalState
+  setGlobalState: Dispatch<SetStateAction<GlobalState>>
 }
