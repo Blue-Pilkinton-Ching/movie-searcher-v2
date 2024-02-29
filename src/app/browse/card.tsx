@@ -21,7 +21,7 @@ export function Card({ data }: CardProps) {
     <Link
       onClick={onClick}
       className="max-w-[154px] hover:cursor-pointer hover:brightness-75 hover:duration-300"
-      href={`/home/media/${data.media_type}/${encodeURIComponent(data.id)}`}
+      href={`/browse/media/${data.media_type}/${encodeURIComponent(data.id)}`}
     >
       <div className={`w-[40vw] max-w-[154px] aspect-[2/3] *:rounded-md`}>
         {data.poster_path == null ? (

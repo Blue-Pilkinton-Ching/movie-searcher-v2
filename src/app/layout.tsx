@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Red_Hat_Display } from 'next/font/google'
 import './globals.css'
-import Providers from './home/providers'
+import Providers from './providers'
 
 const redhatdisplay = Red_Hat_Display({ subsets: ['latin'] })
 
