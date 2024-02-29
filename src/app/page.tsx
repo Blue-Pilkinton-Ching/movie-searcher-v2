@@ -10,6 +10,8 @@ export default function WavyBackgroundDemo() {
 
   return (
     <WavyBackground
+      speed="slow"
+      waveWidth={50}
       className="mx-auto pb-16"
       blur={10}
       colors={['#3c1251', '#a568c4', '#5957ba', '#b83d50']}
