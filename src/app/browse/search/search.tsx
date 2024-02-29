@@ -18,7 +18,7 @@ export async function Search({ search }: { search: string }) {
   media.results = media.results.filter((x) => x.media_type != 'person')
 
   if (media.results.length < 1) {
-    return <p className="text-2xl font-bold">Couldn&apos;t find anything :(</p>
+    return <p className="text-2xl font-bold">{`Couldn't find ${search} :(`}</p>
   }
 
   return (
