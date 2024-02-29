@@ -30,10 +30,9 @@ export default function Layout({
   return (
     <>
       <BackgroundGradientAnimation
-        gradientBackgroundEnd="black"
-        gradientBackgroundStart="black"
-        size="20%"
+        size="15%"
         interactive={false}
+        fifthColor="60, 18, 81"
       >
         <div className="z-50 absolute inset-0">
           <div className="px-[5%]">
