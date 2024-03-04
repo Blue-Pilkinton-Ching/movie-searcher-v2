@@ -22,8 +22,7 @@ export default function WavyBackgroundDemo() {
       <h2 className="md:text-xl lg:text-2xl text-base mt-4 text-white font-normal inter-var text-center">
         All your movie needs in one place
       </h2>
-      <br />
-      <br />
+      <hr className="h-16 border-0" />
       <div className="w-full">
         <SearchBar
           backgroundColor="bg-neutral-900/70"
