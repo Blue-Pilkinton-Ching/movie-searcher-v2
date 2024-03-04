@@ -1,9 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Header } from '../header'
+import { Header } from '../../components/header'
 import { useRouter } from 'next/navigation'
-import { BackgroundGradientAnimation } from '@/components/ui/background-gradient-animation'
 
 export default function Layout({
   children,
@@ -29,18 +28,10 @@ export default function Layout({
 
   return (
     <>
-      <BackgroundGradientAnimation
-        size="15%"
-        interactive={false}
-        fifthColor="60, 18, 81"
-      >
-        <div className="z-50 absolute inset-0">
-          <div className="px-[5%]">
-            <Header search={search} />
-            {children}
-          </div>
-        </div>
-      </BackgroundGradientAnimation>
+      <div className="px-[5%]">
+        <Header search={search} />
+        {children}
+      </div>
     </>
   )
 }
