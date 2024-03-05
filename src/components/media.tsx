@@ -44,7 +44,7 @@ export default function Media({
     <>
       <div className="flex flex-col gap-5 lg:flex-row lg:h-[calc(100vh-116px-20px)] justify-between py-8">
         <div className="h-full lg:max-w-[70%] aspect-video *:flex-grow *:w-full *:h-full *:hover:cursor-pointer *:shadow-2xl *:rounded-2xl">
-          {server === 'Free' ? (
+          {server === 'Free' && type === 'movie' ? (
             <iframe
               src={
                 type === 'movie'
@@ -105,7 +105,7 @@ export default function Media({
           <SeasonsPanel
             type={type}
             value={season}
-            onChange={(event) => setSeason(event.target.value)}
+            onChange={(event) => setSeason(Number(event.target.value))}
             seasons={
               type === 'tv' ? (details as TVDetails).seasons.length : undefined
             }
@@ -119,7 +119,7 @@ export default function Media({
           type={type}
           value={season}
           onChange={(event) => {
-            setSeason(event.target.value)
+            setSeason(Number(event.target.value))
           }}
           seasons={
             type === 'tv' ? (details as TVDetails).seasons.length : undefined

@@ -15,7 +15,7 @@ export default function SeasonsPanel({
   type: 'tv' | 'movie'
   selectEpisode?: (season: number) => void
   seasons?: number
-  value: string
+  value: number
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }) {
   return (

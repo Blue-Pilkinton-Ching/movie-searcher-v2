@@ -44,8 +44,8 @@ export default function ServersPanel({
       </div>
       <br />
       <p className="text-sm font-semibold text-neutral-500">
-        *Note* Ad-Free will attempt to block ads from the video, but will often
-        not work. We recommend installing{' '}
+        *Note* Ad-Free will attempt to block ads on movies, but will often not
+        work. We recommend installing{' '}
         <a
           className="text-mainpurple hover:underline"
           href="https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm"
