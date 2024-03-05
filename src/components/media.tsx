@@ -3,11 +3,12 @@
 import { MouseEvent, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import ServerPanel from '@/components/servers-panel'
+import SeversSeasons from '@/components/servers-seasons'
 
 import { Media, MovieDetails, TVDetails } from '@/../interfaces'
 import Seasons from './seasons'
 import Panel from './panel'
+import Servers from './servers'
 
 type Server = 'Free' | '2embed' | 'Vidsrc.to' | 'Vidsrc.xyz'
 
@@ -92,9 +93,9 @@ export default function Media({
             ></iframe>
           ) : null}
         </div>
-        <ServerPanel
+        <SeversSeasons
           type={type}
-          className="lg:block hidden"
+          className="lg:block block md:hidden"
           fetchServer={fetchServer}
           server={server as Server}
           seasons={
@@ -110,16 +111,13 @@ export default function Media({
           }
           id={id}
         />
-
-        <div className="flex lg:hidden gap-5 flex-col md:flex-row mb-5">
-          <ServerPanel
-            fetchServer={fetchServer}
-            server={server as Server}
-            type={type}
-            id={id}
-          />
+        <div className="lg:hidden gap-5 hidden md:flex flex-row mb-5">
+          <Panel>
+            <Servers fetchServer={fetchServer} server={server as Server} />
+          </Panel>
           <Panel>
             <Seasons
+              className="max-h-[600px] overflow-auto"
               id={id}
               selectEpisode={(season, episode) => {
                 setEpisodeNumber(episode)

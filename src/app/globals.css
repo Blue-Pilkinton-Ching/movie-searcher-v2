@@ -31,3 +31,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #737373;
 }
+
+.max-height {
+  max-height: min(calc(100% - 80px), 600px);
+}
