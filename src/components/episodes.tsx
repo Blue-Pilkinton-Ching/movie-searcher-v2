@@ -18,7 +18,7 @@ export default function Episodes({
 
   useEffect(() => {
     async function fetchSeason() {
-      console.log('fetching')
+      setEpisodes(undefined)
 
       let filledSeason
       try {

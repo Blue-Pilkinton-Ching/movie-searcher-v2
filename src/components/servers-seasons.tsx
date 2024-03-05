@@ -49,7 +49,7 @@ export default function ServersSeasons({
             </button>
           </div>
         ) : null}
-        <div className="max-height overflow-y-auto">
+        <div className="max-height overflow-y-auto scrollbar">
           <div className={displayTV ? 'hidden' : 'block'}>
             <Servers fetchServer={fetchServer} server={server} />
           </div>

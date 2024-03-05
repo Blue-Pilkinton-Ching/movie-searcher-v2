@@ -35,3 +35,7 @@
 .max-height {
   max-height: min(calc(100% - 80px), 600px);
 }
+
+.scrollbar {
+  scrollbar-gutter: stable;
+}
