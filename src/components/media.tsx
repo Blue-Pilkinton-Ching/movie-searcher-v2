@@ -1,12 +1,13 @@
 'use client'
 
-import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import ServerPanel from '@/components/servers-panel'
 
 import { Media, MovieDetails, TVDetails } from '@/../interfaces'
-import SeasonsPanel from './seasons-panel'
+import Seasons from './seasons'
+import Panel from './panel'
 
 type Server = 'Free' | '2embed' | 'Vidsrc.to' | 'Vidsrc.xyz'
 
@@ -28,10 +29,7 @@ export default function Media({
   const router = useRouter()
 
   useEffect(() => {
-    setServer(
-      (params.get('server') as Server | undefined) ||
-        (type === 'movie' ? 'Free' : 'Vidsrc.to')
-    )
+    setServer((params.get('server') as Server | undefined) || 'Vidsrc.to')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.get])
 
@@ -44,25 +42,12 @@ export default function Media({
     <>
       <div className="flex flex-col gap-5 lg:flex-row lg:h-[calc(100vh-116px-20px)] justify-between py-8">
         <div className="h-full lg:max-w-[70%] aspect-video *:flex-grow *:w-full *:h-full *:hover:cursor-pointer *:shadow-2xl *:rounded-2xl">
-          {server === 'Free' && type === 'movie' ? (
+          {server === 'Vidsrc.to' ? (
             <iframe
               src={
                 type === 'movie'
-                  ? `https://www.2embed.cc/embed/${id}`
-                  : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
-              }
-              allowFullScreen
-              sandbox="allow-forms allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-presentation"
-              frameBorder={0}
-              scrolling="no"
-            ></iframe>
-          ) : null}
-          {server === '2embed' ? (
-            <iframe
-              src={
-                type === 'movie'
-                  ? `https://www.2embed.cc/embed/${id}`
-                  : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
+                  ? `https://vidsrc.to/embed/${type}/${id}`
+                  : `https://vidsrc.to/embed/tv/${id}/${season}/${episode}`
               }
               allowFullScreen
               frameBorder={0}
@@ -81,50 +66,69 @@ export default function Media({
               scrolling="no"
             ></iframe>
           ) : null}
-          {server === 'Vidsrc.to' ? (
+          {server === '2embed' ? (
             <iframe
               src={
                 type === 'movie'
-                  ? `https://vidsrc.to/embed/${type}/${id}`
-                  : `https://vidsrc.to/embed/tv/${id}/${season}/${episode}`
+                  ? `https://www.2embed.cc/embed/${id}`
+                  : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
               }
               allowFullScreen
               frameBorder={0}
               scrolling="no"
             ></iframe>
           ) : null}
+          {server === 'Free' ? (
+            <iframe
+              src={
+                type === 'movie'
+                  ? `https://www.2embed.cc/embed/${id}`
+                  : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
+              }
+              allowFullScreen
+              sandbox="allow-forms allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-presentation"
+              frameBorder={0}
+              scrolling="no"
+            ></iframe>
+          ) : null}
         </div>
         <ServerPanel
+          type={type}
           className="lg:block hidden"
           fetchServer={fetchServer}
           server={server as Server}
-        />
-
-        <div className="flex lg:hidden gap-5 flex-col md:flex-row mb-5">
-          <ServerPanel fetchServer={fetchServer} server={server as Server} />
-          <SeasonsPanel
-            type={type}
-            value={season}
-            onChange={(event) => setSeason(Number(event.target.value))}
-            seasons={
-              type === 'tv' ? (details as TVDetails).seasons.length : undefined
-            }
-          />
-        </div>
-      </div>
-      <div className="flex gap-5 mt-5">
-        <div className="w-full"></div>
-        <SeasonsPanel
-          className="lg:block hidden"
-          type={type}
-          value={season}
-          onChange={(event) => {
-            setSeason(Number(event.target.value))
-          }}
           seasons={
             type === 'tv' ? (details as TVDetails).seasons.length : undefined
           }
+          selectEpisode={
+            type === 'tv'
+              ? (season, episode) => {
+                  setEpisodeNumber(episode)
+                  setSeason(season)
+                }
+              : undefined
+          }
+          id={id}
         />
+
+        <div className="flex lg:hidden gap-5 flex-col md:flex-row mb-5">
+          <ServerPanel
+            fetchServer={fetchServer}
+            server={server as Server}
+            type={type}
+            id={id}
+          />
+          <Panel>
+            <Seasons
+              id={id}
+              selectEpisode={(season, episode) => {
+                setEpisodeNumber(episode)
+                setSeason(season)
+              }}
+              seasons={(details as TVDetails).seasons.length}
+            />
+          </Panel>
+        </div>
       </div>
     </>
   )

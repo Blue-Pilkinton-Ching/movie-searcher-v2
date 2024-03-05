@@ -7,7 +7,7 @@ export default function Panel({
 }) {
   return (
     <div
-      className={`w-full rounded-2xl bg-neutral-700/30 lg:p-3 p-5 text-center ${className}`}
+      className={`lg:w-[20vw] w-full rounded-2xl bg-neutral-700/30 p-5 text-center flex-grow ${className}`}
     >
       {children}
     </div>
