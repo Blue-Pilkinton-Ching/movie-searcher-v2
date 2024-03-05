@@ -14,7 +14,7 @@ export default function ServersPanel({
   fetchServer: (event: MouseEvent<HTMLButtonElement>, server: string) => void
 }) {
   return (
-    <Panel className={className}>
+    <Panel className={`${className} lg:h-full xl:p-[3vw]`}>
       <h1 className="text-3xl font-bold py-2.5 wrap">Servers</h1>
       <p className="text-sm font-semibold text-neutral-500">
         If one of the servers is not working try another.
