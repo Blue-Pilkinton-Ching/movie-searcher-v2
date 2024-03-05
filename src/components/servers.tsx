@@ -11,7 +11,7 @@ export default function Servers({
   server: string
 }) {
   return (
-    <>
+    <div className="max-w-[400px] mx-auto">
       <h1 className="text-3xl font-bold py-2.5 wrap">Servers</h1>
       <p className="text-sm font-semibold text-neutral-500">
         If one of the servers is not working try another.
@@ -51,6 +51,6 @@ export default function Servers({
         </a>
         and using a different server.
       </p>
-    </>
+    </div>
   )
 }

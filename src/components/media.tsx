@@ -93,39 +93,48 @@ export default function Media({
             ></iframe>
           ) : null}
         </div>
-        <SeversSeasons
-          type={type}
-          className="lg:block block md:hidden"
-          fetchServer={fetchServer}
-          server={server as Server}
-          seasons={
-            type === 'tv' ? (details as TVDetails).seasons.length : undefined
-          }
-          selectEpisode={
-            type === 'tv'
-              ? (season, episode) => {
-                  setEpisodeNumber(episode)
-                  setSeason(season)
-                }
-              : undefined
-          }
-          id={id}
-        />
+        {type === 'tv' ? (
+          <SeversSeasons
+            type={type}
+            className="lg:block block md:hidden"
+            fetchServer={fetchServer}
+            server={server as Server}
+            seasons={
+              type === 'tv' ? (details as TVDetails).seasons.length : undefined
+            }
+            selectEpisode={
+              type === 'tv'
+                ? (season, episode) => {
+                    setEpisodeNumber(episode)
+                    setSeason(season)
+                  }
+                : undefined
+            }
+            id={id}
+          />
+        ) : (
+          <Panel className="lg:block block md:hidden">
+            <Servers fetchServer={fetchServer} server={server as Server} />
+          </Panel>
+        )}
+
         <div className="lg:hidden gap-5 hidden md:flex flex-row mb-5">
           <Panel>
             <Servers fetchServer={fetchServer} server={server as Server} />
           </Panel>
-          <Panel>
-            <Seasons
-              className="max-h-[600px] overflow-auto"
-              id={id}
-              selectEpisode={(season, episode) => {
-                setEpisodeNumber(episode)
-                setSeason(season)
-              }}
-              seasons={(details as TVDetails).seasons.length}
-            />
-          </Panel>
+          {type === 'tv' ? (
+            <Panel>
+              <Seasons
+                className={`max-h-[600px] overflow-auto`}
+                id={id}
+                selectEpisode={(season, episode) => {
+                  setEpisodeNumber(episode)
+                  setSeason(season)
+                }}
+                seasons={(details as TVDetails).seasons.length}
+              />
+            </Panel>
+          ) : null}
         </div>
       </div>
     </>
