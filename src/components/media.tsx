@@ -1,8 +1,9 @@
 'use client'
 
 import { MouseEvent, useEffect, useState } from 'react'
-import ServerButton from './server-button'
 import { useRouter, useSearchParams } from 'next/navigation'
+
+import ServerPanel from '@/components/servers-panel'
 
 type Server = 'Free' | '2embed' | 'Vidsrc.to' | 'Vidsrc.xyz'
 
@@ -66,48 +67,14 @@ export default function Media({
             ></iframe>
           ) : null}
         </div>
-        <div className="xl:w-[30%] lg:w-[23%] h-20 w-full lg:max-w-80 lg:h-[calc(90vh-116px-20px)] rounded-2xl bg-neutral-700/30 lg:p-3 xl:p-5 text-center">
-          <div>
-            <h1 className="text-3xl font-bold py-2.5 wrap">Servers</h1>
-            <p className="text-sm font-semibold text-neutral-500">
-              If one of the servers is not working try another.
-            </p>
-            <br />
-            <div className="flex gap-3 flex-col items-center flex-wrap">
-              <ServerButton
-                selected={server === 'Free'}
-                text={'Ad-Free'}
-                onClick={(event) => fetchServer(event, 'Free')}
-              />
-              <ServerButton
-                selected={server === '2embed'}
-                text={'2embed'}
-                onClick={(event) => fetchServer(event, '2embed')}
-              />
-              <ServerButton
-                selected={server === 'Vidsrc.xyz'}
-                text={'Vidsrc.xyz'}
-                onClick={(event) => fetchServer(event, 'Vidsrc.xyz')}
-              />
-              <ServerButton
-                selected={server === 'Vidsrc.to'}
-                text={'Vidsrc.to'}
-                onClick={(event) => fetchServer(event, 'Vidsrc.to')}
-              />
-            </div>
-            <br />
-            <p className="text-sm font-semibold text-neutral-500">
-              *Note* Ad-Free will attempt to block ads from the video, but will
-              often not work. We recommend installing{' '}
-              <a
-                className="text-mainpurple hover:underline"
-                href="https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm"
-              >
-                uBlock Origin{' '}
-              </a>
-              and using a different server.
-            </p>
-          </div>
+        <ServerPanel
+          className="lg:block hidden"
+          fetchServer={fetchServer}
+          server={server as Server}
+        />
+        <div className="flex lg:hidden gap-5 flex-col md:flex-row">
+          <ServerPanel fetchServer={fetchServer} server={server as Server} />
+          <ServerPanel fetchServer={fetchServer} server={server as Server} />
         </div>
       </div>
     </>
