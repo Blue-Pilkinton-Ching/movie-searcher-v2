@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Header } from '../../components/header'
 import { useRouter } from 'next/navigation'
+import { initializeApp } from 'firebase/app'
 
 export default function Layout({
   children,
@@ -26,9 +27,21 @@ export default function Layout({
     setSearchText(trim)
   }
 
+  useEffect(() => {
+    const firebaseConfig = {
+      apiKey: 'AIzaSyDleFcM-7ohh4diMcVIz7sxb8EUlsjGLLE',
+      authDomain: 'watchalot-27b1c.firebaseapp.com',
+      projectId: 'watchalot-27b1c',
+      storageBucket: 'watchalot-27b1c.appspot.com',
+      messagingSenderId: '1059512127171',
+      appId: '1:1059512127171:web:7f759589859065fba21c76',
+    }
+    initializeApp(firebaseConfig)
+  }, [])
+
   return (
     <>
-      <div className="px-[5%]">
+      <div className="px-[5%] overflow-auto max-h-dvh">
         <Header search={search} />
         {children}
       </div>

@@ -1,27 +1,14 @@
-'use client'
-
 import Image from 'next/image'
 import { GlobalState, Media } from '../../../interfaces'
 import Link from 'next/link'
-import { useGlobalState } from '../globalState'
 
 export interface CardProps {
   data: Media
 }
 
 export function Card({ data }: CardProps) {
-  const { setGlobalState } = useGlobalState()
-
-  function onClick() {
-    setGlobalState((oldState: GlobalState) => ({
-      ...oldState,
-      currentMedia: data,
-    }))
-  }
-
   return (
     <Link
-      onClick={onClick}
       className="max-w-[154px] hover:cursor-pointer hover:brightness-75 duration-200 hover:scale-[1.03]"
       href={`/browse/media/${data.media_type}/${encodeURIComponent(data.id)}`}
     >
