@@ -1,7 +1,4 @@
 import { Suspense } from 'react'
-import { MediaSearch } from '../../../../interfaces'
-import { Card } from '../card'
-import TMDBAuthHeader from '@/utils/server/tmdb-header'
 import { Search } from './search'
 
 export default async function Page({
