@@ -1,3 +1,10 @@
+import React, { Suspense } from 'react'
+import Content from './content'
+
 export default function Page() {
-  return <p>More stuff coming soon!</p>
+  return (
+    <Suspense>
+      <Content />
+    </Suspense>
+  )
 }
