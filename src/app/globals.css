@@ -22,14 +22,14 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #737373;
+  background-color: rgb(115, 115, 115);
   border-radius: 9999px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #535353;
+  background-color: rgb(64, 64, 64);
 }
 
 .max-height {
