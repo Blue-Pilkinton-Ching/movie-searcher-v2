@@ -127,3 +127,11 @@ export interface Episode {
 export interface FilledSeason extends Season {
   episodes: Episode[]
 }
+
+export type Provider =
+  | 'google'
+  | 'facebook'
+  | 'github'
+  | 'twitter'
+  | 'email'
+  | 'sign out'

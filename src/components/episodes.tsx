@@ -40,13 +40,21 @@ export default function Episodes({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [season, id])
 
-  if (!episodes) {
-    return null
+  if (episodes === undefined) {
+    return <p className="text-neutral-500 font-medium">Loading Episodes...</p>
+  }
+
+  if (episodes?.length === 0) {
+    return (
+      <p className="text-neutral-500 font-medium">
+        Couldn&apos;t find any Episodes!
+      </p>
+    )
   }
 
   return (
     <div>
-      {episodes.map((episode) => (
+      {episodes?.map((episode) => (
         <Episode
           key={episode.episode_number}
           episode={episode}
