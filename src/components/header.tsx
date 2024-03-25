@@ -15,7 +15,7 @@ export function Header(props: HeaderProps) {
   return (
     <header className="w-full h-fit min-h-24 flex items-center lg:justify-between flex-col *:h-full *:flex *:items-center lg:flex-row py-5">
       <div>
-        <Link href={'/'}>
+        <Link href={'/browse'}>
           <div className="text-3xl py-5">Watchalot</div>
         </Link>
       </div>
