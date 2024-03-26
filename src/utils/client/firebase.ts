@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
 import * as firebase from 'firebase/app'
 
-if (firebase.getApps().length === 0 && typeof window !== 'undefined') {
+if (!firebase.getApps().length) {
   const firebaseConfig = {
     apiKey: 'AIzaSyDleFcM-7ohh4diMcVIz7sxb8EUlsjGLLE',
     authDomain: 'watchalot-27b1c.firebaseapp.com',
@@ -14,5 +14,7 @@ if (firebase.getApps().length === 0 && typeof window !== 'undefined') {
   }
 
   const app = initializeApp(firebaseConfig)
-  getAnalytics(app)
+  if (typeof window !== 'undefined') {
+    getAnalytics(app)
+  }
 }

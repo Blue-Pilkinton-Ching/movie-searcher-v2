@@ -5,6 +5,8 @@ import SignInButton from './sign-in-button'
 import { getAuth } from 'firebase/auth'
 import { MdOutlineLogout } from 'react-icons/md'
 
+import './../../utils/client/firebase'
+
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 export default function Page() {
