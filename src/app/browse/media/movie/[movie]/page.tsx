@@ -1,6 +1,6 @@
 import Media from '@/components/media'
 import TMDBAuthHeader from '@/utils/server/tmdb-header'
-import { MediaSearch, MovieDetails } from '../../../../../../interfaces'
+import { MovieDetails } from '../../../../../../interfaces'
 
 export default async function Page({ params }: { params: { movie: number } }) {
   let media

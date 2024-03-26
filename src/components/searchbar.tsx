@@ -1,6 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { ChangeEvent, useState } from 'react'
+import { FaRegUser } from 'react-icons/fa'
 
 export default function SearchBar({
   onValueChange,
@@ -32,14 +34,14 @@ export default function SearchBar({
   }
 
   return (
-    <div className="w-full px-[5%] flex items-center">
+    <div className="w-full px-[5%] flex items-center gap-3">
       <textarea
         value={searchValue}
         onKeyDown={onKeyDown}
         onChange={onChange}
         className={`w-full ${
           backgroundColor ? backgroundColor : 'bg-neutral-700/30'
-        } h-10 resize-none focus:outline-none rounded line py-1.5 overflow-hidden px-5 text-lg`}
+        } h-10 resize-none focus:outline-none rounded line py-1.5 overflow-hidden px-5 text-lg shadow-lg`}
         name="search"
         cols={1}
         rows={1}
@@ -47,6 +49,12 @@ export default function SearchBar({
           placeholder ? placeholder : 'Search for movies or TV shows...'
         }
       ></textarea>
+      <Link
+        className="rounded-md aspect-square bg-neutral-900/70 h-10 hover:scale-105 active:scale-95 shadow-lg"
+        href={'/account'}
+      >
+        <FaRegUser color="#6b7280" size={'100%'} className="p-2" />
+      </Link>
     </div>
   )
 }

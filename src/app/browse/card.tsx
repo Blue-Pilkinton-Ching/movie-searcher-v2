@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { GlobalState, Media } from '../../../interfaces'
+import { Media } from '../../../interfaces'
 import Link from 'next/link'
 
 export interface CardProps {
