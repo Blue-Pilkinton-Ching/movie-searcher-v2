@@ -4,6 +4,7 @@ import { Header } from '@/components/header'
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import './../../utils/client/firebase'
 
 export default function HeaderWrapper() {
   const [searchText, setSearchText] = useState('')

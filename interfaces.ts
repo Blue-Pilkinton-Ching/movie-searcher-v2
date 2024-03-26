@@ -29,13 +29,6 @@ export interface Media {
   video?: boolean
 }
 
-export interface GlobalState {}
-
-export interface GlobalStateWrapper {
-  globalState: GlobalState
-  setGlobalState: Dispatch<SetStateAction<GlobalState>>
-}
-
 export interface TVDetails {
   adult: boolean
   backdrop_path: string

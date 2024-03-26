@@ -37,6 +37,24 @@
 }
 
 .scrollbar {
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
   overflow: overlay;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.mask {
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 20px,
+    rgba(0, 0, 0, 1) calc(100% - 20px),
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+html {
+  scroll-behavior: smooth;
 }

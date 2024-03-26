@@ -15,8 +15,8 @@ export function Header(props: HeaderProps) {
   return (
     <header className="w-full h-fit min-h-24 flex items-center lg:justify-between flex-col *:h-full *:flex *:items-center lg:flex-row py-5">
       <div>
-        <Link href={'/browse'}>
-          <div className="text-3xl py-5">Watchalot</div>
+        <Link href={'/browse'} className="hover:brightness-75 duration-200">
+          <div className="text-3xl py-5 ">Watchalot</div>
         </Link>
       </div>
       <div className="w-full px-[5%]">
