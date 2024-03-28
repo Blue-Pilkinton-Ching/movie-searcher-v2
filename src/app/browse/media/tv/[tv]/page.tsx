@@ -1,6 +1,6 @@
 import Media from '@/components/media'
 import TMDBAuthHeader from '@/utils/server/tmdb-header'
-import { MediaSearch, TVDetails } from '../../../../../../interfaces'
+import { TVDetails } from '../../../../../../interfaces'
 
 export default async function Page({ params }: { params: { tv: number } }) {
   let media
@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { tv: number } }) {
           `https://api.themoviedb.org/3/tv/${
             params.tv
           }&include_adult=${false}&language=en-US&page=${1}`,
-          { ...TMDBAuthHeader(), cache: 'no-store' }
+          { ...TMDBAuthHeader() }
         )
       ).text()
     )) as TVDetails

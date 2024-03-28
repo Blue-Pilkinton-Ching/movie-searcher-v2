@@ -41,7 +41,7 @@ export default function SearchBar({
   }
 
   return (
-    <div className="w-full px-[5%] flex items-center gap-3">
+    <div className="w-full flex items-center gap-3">
       <textarea
         ref={searchRef}
         value={searchValue}

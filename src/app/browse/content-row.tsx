@@ -19,9 +19,10 @@ export default function ContentRow({
   useEffect(() => {
     if (row.current) {
       row.current.addEventListener('scroll', () => {
-        setScrollValue(row.current?.scrollLeft || 0)
+        setScrollValue(row.current?.scrollLeft || -1)
       })
     }
+    setScrollValue(row.current?.scrollLeft || -1)
   }, [])
 
   function onClickLeft() {
@@ -48,7 +49,7 @@ export default function ContentRow({
       <div className="relative group">
         <div
           ref={row}
-          className="flex gap-5 sm:gap-8 justify-evenly max-w-full px-5 mask overflow-y-hidden hide-scrollbar py-2 relative"
+          className="flex gap-5 sm:gap-8 w-min justify-start max-w-full px-5 mask overflow-y-hidden hide-scrollbar py-2 relative"
         >
           {cards}
         </div>
@@ -58,7 +59,10 @@ export default function ContentRow({
               onClick={onClickLeft}
               className="-translate-x-full left-0"
               style={{
-                display: `${row.current?.scrollLeft === 0 ? 'none' : 'block'}`,
+                cursor: `${
+                  row.current?.scrollLeft === 0 ? 'default' : 'pointer'
+                }`,
+                opacity: `${row.current?.scrollLeft === 0 ? '0' : '100'}`,
               }}
             >
               <MdArrowBackIos size={36} className="-translate-y-6" />
@@ -67,12 +71,19 @@ export default function ContentRow({
               onClick={onClickRight}
               className="translate-x-full right-0 "
               style={{
-                display: `${
+                cursor: `${
                   row.current?.scrollLeft ===
                   (row.current?.scrollWidth || -1) -
                     (row.current?.clientWidth || -1)
-                    ? 'none'
-                    : 'block'
+                    ? 'default'
+                    : 'pointer'
+                }`,
+                opacity: `${
+                  row.current?.scrollLeft ===
+                  (row.current?.scrollWidth || -1) -
+                    (row.current?.clientWidth || -1)
+                    ? '0'
+                    : '100'
                 }`,
               }}
             >
