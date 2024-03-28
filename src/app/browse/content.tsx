@@ -14,6 +14,7 @@ export default async function Content() {
           'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
           {
             ...TMDBAuthHeader(),
+            next: { revalidate: 3600 },
           }
         )
       ).json()
