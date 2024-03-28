@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { FaRegUser } from 'react-icons/fa'
 
 export default function SearchBar({
@@ -16,6 +16,13 @@ export default function SearchBar({
   placeholder?: string
 }) {
   const [searchValue, setSearchValue] = useState('')
+  const searchRef = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    if (searchRef.current) {
+      searchRef.current.focus()
+    }
+  }, [searchRef])
 
   function onKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (event.key === 'Enter') {
@@ -36,6 +43,7 @@ export default function SearchBar({
   return (
     <div className="w-full px-[5%] flex items-center gap-3">
       <textarea
+        ref={searchRef}
         value={searchValue}
         onKeyDown={onKeyDown}
         onChange={onChange}

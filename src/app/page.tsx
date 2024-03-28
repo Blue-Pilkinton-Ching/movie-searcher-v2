@@ -39,11 +39,15 @@ export default function WavyBackgroundDemo() {
             All your movie needs in one place
           </h2>
           <hr className="h-16 border-0" />
-          <div className="w-full flex ">
+          <div className="w-[90vw] sm:w-[500px] flex ">
             <SearchBar
               backgroundColor="bg-neutral-900/70"
               onEnterKey={(value) =>
-                router.push(`/browse/search?query=${encodeURIComponent(value)}`)
+                router.push(
+                  `/browse/${
+                    value ? `search?query=${encodeURIComponent(value)}` : ''
+                  }`
+                )
               }
             />
           </div>
