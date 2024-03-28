@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { movie: number } }) {
           `https://api.themoviedb.org/3/movie/${
             params.movie
           }&include_adult=${false}&language=en-US&page=${1}`,
-          { ...TMDBAuthHeader(), cache: 'no-store' }
+          { ...TMDBAuthHeader() }
         )
       ).text()
     )) as MovieDetails

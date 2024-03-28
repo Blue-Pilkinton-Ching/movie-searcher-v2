@@ -26,13 +26,23 @@ export default function SignInButton({
     let action
     switch (provider) {
       case 'google':
-        action = auth.signInWithPopup(
-          auth.getAuth(),
-          new auth.GoogleAuthProvider()
-        )
+        try {
+          action = auth.signInWithPopup(
+            auth.getAuth(),
+            new auth.GoogleAuthProvider()
+          )
+        } catch (error) {
+          console.error(error)
+          alert(error)
+        }
         break
       case 'sign out':
-        action = auth.signOut(auth.getAuth())
+        try {
+          action = auth.signOut(auth.getAuth())
+        } catch (error) {
+          console.error(error)
+          alert(error)
+        }
         break
 
       default:
