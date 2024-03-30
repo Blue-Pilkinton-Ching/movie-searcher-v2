@@ -1,6 +1,5 @@
 'use client'
 
-import { Media } from '../../../interfaces'
 import { Card } from './card'
 import ContentRow from './content-row'
 import { useEffect, useState } from 'react'
@@ -10,12 +9,13 @@ import { getAuth } from 'firebase/auth'
 import '@/utils/client/firebase'
 
 import * as fs from 'firebase/firestore'
+import { Media, RecentMedia } from '../../../interfaces'
 
 export default function RecentContent() {
   const [user] = useAuthState(getAuth())
 
-  const [movies, setMovies] = useState<Media[]>()
-  const [tv, setTV] = useState<Media[]>()
+  const [movies, setMovies] = useState<RecentMedia[]>()
+  const [tv, setTV] = useState<RecentMedia[]>()
 
   useEffect(() => {
     async function getRecentMedia() {
@@ -32,7 +32,11 @@ export default function RecentContent() {
                     )
                   )
                 ).data() as Object
-              ).map(([key, value]) => value as Media)
+              )
+                .map(([key, value]) => value as RecentMedia)
+                .sort((a, b) => {
+                  return b.time_watched - a.time_watched
+                })
             )
           } catch (error) {
             console.error(error)
@@ -50,7 +54,11 @@ export default function RecentContent() {
                     )
                   )
                 ).data() as Object
-              ).map(([key, value]) => value as Media)
+              )
+                .map(([key, value]) => value as RecentMedia)
+                .sort((a, b) => {
+                  return b.time_watched - a.time_watched
+                })
             )
           } catch (error) {
             console.error(error)

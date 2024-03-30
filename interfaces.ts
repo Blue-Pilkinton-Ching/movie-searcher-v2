@@ -7,6 +7,10 @@ export interface MediaSearch {
   total_results: number
 }
 
+export interface RecentMedia extends Media {
+  time_watched: number
+}
+
 export interface Media {
   adult: boolean
   backdrop_path?: string | null | undefined
