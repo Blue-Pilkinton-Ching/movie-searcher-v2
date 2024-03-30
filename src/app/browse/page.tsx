@@ -5,12 +5,12 @@ import RecentContent from './recent-content'
 export default function Page() {
   return (
     <>
-      <RecentContent />
       <Suspense
         fallback={<p className="text-2xl font-bold">Loading content...</p>}
       >
         <TrendingContent />
       </Suspense>
+      <RecentContent />
     </>
   )
 }

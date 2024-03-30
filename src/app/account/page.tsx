@@ -27,13 +27,19 @@ export default function Page() {
           className="border-none bg-neutral-500/20"
         />
       ) : (
-        <SignInButton
-          textClassName="text-neutral-500"
-          provider={'google'}
-          text="Sign in with Google"
-          icon={<FcGoogle size={30} />}
-          className="border-neutral-400 bg-white"
-        />
+        <>
+          <SignInButton
+            textClassName="text-neutral-500"
+            provider={'google'}
+            text="Sign in with Google"
+            icon={<FcGoogle size={30} />}
+            className="border-neutral-400 bg-white"
+          />
+          <p className="text-sm max-w-[350px] py-2">
+            Creating an account allows you to view recently watched Media, and
+            craete movie lists!
+          </p>
+        </>
       )}
     </div>
   )

@@ -53,7 +53,14 @@ export default function Media({
             ),
             user.uid
           ),
-          { [id]: details },
+          {
+            [id]: {
+              ...details,
+              type: type,
+              media_type: type,
+              time_watched: Date.now(),
+            },
+          },
           { merge: true }
         )
       } catch (error) {
