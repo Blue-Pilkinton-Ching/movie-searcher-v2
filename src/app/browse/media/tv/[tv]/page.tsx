@@ -1,6 +1,6 @@
-import Media from '@/components/media'
 import TMDBAuthHeader from '@/utils/server/tmdb-header'
-import { TVDetails } from '../../../../../../interfaces'
+import { TVDetails, TVHistory } from '../../../../../../interfaces'
+import Media from '@/components/media'
 
 export default async function Page({ params }: { params: { tv: number } }) {
   let media

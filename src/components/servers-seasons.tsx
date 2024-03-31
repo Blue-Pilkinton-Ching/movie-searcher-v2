@@ -4,6 +4,7 @@ import Panel from './panel'
 import Seasons from './seasons'
 import { MouseEvent, useEffect, useState } from 'react'
 import Servers from './servers'
+import { TVHistory } from '../../interfaces'
 
 export default function ServersSeasons({
   className,
@@ -12,6 +13,7 @@ export default function ServersSeasons({
   type,
   seasons,
   selectEpisode,
+  history,
   id,
 }: {
   className?: string
@@ -20,6 +22,7 @@ export default function ServersSeasons({
   type: 'movie' | 'tv'
   id: number
   seasons?: number
+  history: TVHistory | undefined
   selectEpisode?: (season: number, episode: number) => void
 }) {
   useEffect(() => {
@@ -55,6 +58,7 @@ export default function ServersSeasons({
           </div>
           <div className={displayTV ? 'block' : 'hidden'}>
             <Seasons
+              history={history}
               selectEpisode={
                 selectEpisode as (season: number, episode: number) => void
               }

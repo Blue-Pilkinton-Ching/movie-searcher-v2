@@ -5,7 +5,13 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 import SeversSeasons from '@/components/servers-seasons'
 
-import { Media, MovieDetails, TVDetails } from '@/../interfaces'
+import {
+  Media,
+  MovieDetails,
+  SeasonHistory,
+  TVDetails,
+  TVHistory,
+} from '@/../interfaces'
 import Seasons from './seasons'
 import Panel from './panel'
 import Servers from './servers'
@@ -33,6 +39,8 @@ export default function Media({
   const [season, setSeason] = useState(1)
   const [episode, setEpisodeNumber] = useState(1)
 
+  const [history, setHistory] = useState<TVHistory>()
+
   const [user] = useAuthState(getAuth())
 
   const router = useRouter()
@@ -44,28 +52,50 @@ export default function Media({
 
   useEffect(() => {
     if (user) {
-      try {
-        fs.setDoc(
-          fs.doc(
-            fs.collection(
-              fs.getFirestore(),
-              `recent-${type === 'movie' ? 'movies' : 'tv'}`
-            ),
-            user.uid
-          ),
-          {
-            [id]: {
-              ...details,
-              type: type,
-              media_type: type,
-              time_watched: Date.now(),
-            },
-          },
-          { merge: true }
-        )
-      } catch (error) {
-        console.log(error)
-      }
+      Promise.allSettled([
+        (async () => {
+          try {
+            fs.setDoc(
+              fs.doc(
+                fs.collection(
+                  fs.getFirestore(),
+                  `recent-${type === 'movie' ? 'movies' : 'tv'}`
+                ),
+                user.uid
+              ),
+              {
+                [id]: {
+                  ...details,
+                  type: type,
+                  media_type: type,
+                  time_watched: Date.now(),
+                },
+              },
+              { merge: true }
+            )
+          } catch (error) {
+            console.log(error)
+          }
+        })(),
+        (async () => {
+          try {
+            if (type === 'tv') {
+              setHistory(
+                (
+                  await fs.getDoc(
+                    fs.doc(
+                      fs.getFirestore(),
+                      `recent-tv/${user?.uid}/history/${details.id}`
+                    )
+                  )
+                ).data() as TVHistory | undefined
+              )
+            }
+          } catch (error) {
+            console.error(error)
+          }
+        })(),
+      ])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
@@ -73,6 +103,59 @@ export default function Media({
   function fetchServer(event: MouseEvent<HTMLButtonElement>, server: string) {
     event.preventDefault()
     router.push(`/browse/media/${type}/${id}?server=${server}`)
+  }
+
+  function selectEpisode(season: number, episode: number) {
+    if (type === 'tv') {
+      setEpisodeNumber(episode)
+      setSeason(season)
+
+      let newHistory = {} as any
+
+      if (history != undefined) {
+        newHistory = { ...history }
+
+        if (history.seasons != undefined) {
+          if (
+            history.seasons.find((x: any) => x.season === season) != undefined
+          ) {
+            const seasonIndex = history.seasons.findIndex(
+              (x: any) => x.season === season
+            )
+
+            newHistory.seasons[seasonIndex].episodes.push(episode)
+          } else {
+            newHistory.seasons.push({
+              season: season,
+              episodes: [episode],
+            })
+          }
+        } else {
+          newHistory.seasons = []
+          newHistory.seasons.push({
+            season: season,
+            episodes: [episode],
+          })
+        }
+      } else {
+        newHistory.id = details.id
+        newHistory.seasons = []
+        newHistory.seasons.push({
+          season: season,
+          episodes: [episode],
+        })
+      }
+
+      setHistory(newHistory)
+
+      fs.setDoc(
+        fs.doc(
+          fs.getFirestore(),
+          `recent-tv/${user?.uid}/history/${details.id}`
+        ),
+        newHistory
+      )
+    }
   }
 
   return (
@@ -131,6 +214,7 @@ export default function Media({
         </div>
         {type === 'tv' ? (
           <SeversSeasons
+            history={history}
             type={type}
             className="lg:block block md:hidden"
             fetchServer={fetchServer}
@@ -138,14 +222,7 @@ export default function Media({
             seasons={
               type === 'tv' ? (details as TVDetails).seasons.length : undefined
             }
-            selectEpisode={
-              type === 'tv'
-                ? (season, episode) => {
-                    setEpisodeNumber(episode)
-                    setSeason(season)
-                  }
-                : undefined
-            }
+            selectEpisode={selectEpisode}
             id={id}
           />
         ) : (
@@ -161,12 +238,10 @@ export default function Media({
           {type === 'tv' ? (
             <Panel>
               <Seasons
+                history={history}
                 className={`max-h-[600px] overflow-auto`}
                 id={id}
-                selectEpisode={(season, episode) => {
-                  setEpisodeNumber(episode)
-                  setSeason(season)
-                }}
+                selectEpisode={selectEpisode}
                 seasons={(details as TVDetails).seasons.length}
               />
             </Panel>

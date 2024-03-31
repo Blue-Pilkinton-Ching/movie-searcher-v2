@@ -11,6 +11,16 @@ export interface RecentMedia extends Media {
   time_watched: number
 }
 
+export interface TVHistory {
+  id: number
+  seasons: SeasonHistory[]
+}
+
+export interface SeasonHistory {
+  season: number
+  episodes: number[]
+}
+
 export interface Media {
   adult: boolean
   backdrop_path?: string | null | undefined

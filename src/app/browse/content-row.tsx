@@ -54,7 +54,7 @@ export default function ContentRow({
           {cards}
         </div>
         <div className="absolute top-0 w-full h-[285px] my-2 hidden sm:block pointer-events-none">
-          <div className="relative h-full *:w-9 *:h-full *:absolute hover:*:*:brightness-75 active:*:*:scale-90 *:hover:opacity-100 *:group-hover:opacity-100 *:cursor-pointer *:opacity-0 *:*:duration-200 *:duration-200 *:pointer-events-auto">
+          <div className="relative h-full *:w-9 *:h-full *:absolute hover:*:*:brightness-75 active:*:*:scale-90 *:hover:opacity-100 duration-200 group-hover:opacity-100 *:cursor-pointer opacity-0 *:*:duration-200 *:duration-200 *:pointer-events-auto">
             <button
               onClick={onClickLeft}
               className="-translate-x-full left-0"

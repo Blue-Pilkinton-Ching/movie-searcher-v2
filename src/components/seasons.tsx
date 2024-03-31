@@ -2,13 +2,16 @@
 
 import { ChangeEvent, useState } from 'react'
 import Episodes from './episodes'
+import { TVHistory } from '../../interfaces'
 
 export default function Seasons({
   selectEpisode,
   seasons,
+  history,
   id,
   className,
 }: {
+  history: TVHistory | undefined
   className?: string
   selectEpisode: (season: number, episode: number) => void
   seasons: number
@@ -35,6 +38,11 @@ export default function Seasons({
           ))}
         </select>
         <Episodes
+          history={
+            history && history.seasons
+              ? history.seasons.find((s) => s.season === season)
+              : undefined
+          }
           season={season}
           id={id}
           selectEpisode={(episode) => {
