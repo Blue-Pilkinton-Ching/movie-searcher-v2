@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { IoMdArrowBack } from 'react-icons/io'
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full h-dvh flex items-center justify-center flex-col gap-3">
+    <div className="w-full h-svh flex items-center justify-center flex-col gap-3">
       {children}
       {/* <hr className="w-[300px] border-neutral-500 my-5" />
       <Link
