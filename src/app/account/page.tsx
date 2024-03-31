@@ -36,8 +36,8 @@ export default function Page() {
             className="border-neutral-400 bg-white"
           />
           <p className="text-sm max-w-[350px] py-2">
-            Creating an account allows you to view recently watched Media, and
-            craete movie lists!
+            Creating an account allows you to view recently watched media, and
+            create movie lists!
           </p>
         </>
       )}
