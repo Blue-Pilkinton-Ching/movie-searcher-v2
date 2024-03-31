@@ -7,7 +7,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <div className="px-[5%] overflow-auto max-h-dvh">
+      <div className="px-[5%] overflow-auto max-h-lvh scrollbar">
         <HeaderWrapper />
         {children}
       </div>
