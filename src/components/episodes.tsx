@@ -1,7 +1,11 @@
 'use client'
 
 import TMDBAuthHeader from '@/utils/server/tmdb-header'
-import { Episode as EpisodeType, FilledSeason } from '../../interfaces'
+import {
+  Episode as EpisodeType,
+  FilledSeason,
+  SeasonHistory,
+} from '../../interfaces'
 import { useEffect, useState } from 'react'
 import Episode from './episode'
 
@@ -9,7 +13,9 @@ export default function Episodes({
   season,
   id,
   selectEpisode,
+  history,
 }: {
+  history: SeasonHistory | undefined
   season: number
   id: number
   selectEpisode: (episode: number) => void
@@ -56,6 +62,10 @@ export default function Episodes({
     <div>
       {episodes?.map((episode) => (
         <Episode
+          watched={
+            history?.episodes.find((x) => x === episode.episode_number) !=
+            undefined
+          }
           key={episode.episode_number}
           episode={episode}
           selectEpisode={selectEpisode}
