@@ -36,7 +36,7 @@ export default function WavyBackgroundDemo() {
             Watch alot
           </h1>
           <h2 className="md:text-xl lg:text-2xl text-base mt-4 text-white font-normal inter-var text-center">
-            All your movie needs in one place
+            All your streaming needs in one place
           </h2>
           <hr className="h-16 border-0" />
           <div className="w-[90vw] sm:w-[500px] flex ">
