@@ -162,7 +162,7 @@ export default function Media({
     <>
       <div className="flex flex-col gap-5 lg:flex-row lg:h-[calc(100vh-116px-20px)] justify-between py-8">
         <div className="h-full lg:max-w-[70%] aspect-video *:flex-grow *:w-full *:h-full *:hover:cursor-pointer *:shadow-2xl *:rounded-2xl">
-          {/* {server === 'Vidsrc.to' ? (
+          {server === 'Vidsrc.to' ? (
             <iframe
               src={
                 type === 'movie'
@@ -210,7 +210,7 @@ export default function Media({
               frameBorder={0}
               scrolling="no"
             ></iframe>
-          ) : null} */}
+          ) : null}
         </div>
         {type === 'tv' ? (
           <SeversSeasons
