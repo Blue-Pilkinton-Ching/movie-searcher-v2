@@ -11,6 +11,10 @@ export interface RecentMedia extends Media {
   time_watched: number
 }
 
+export interface Settings {
+  showMoreServers: boolean
+}
+
 export interface TVHistory {
   id: number
   seasons: SeasonHistory[]
