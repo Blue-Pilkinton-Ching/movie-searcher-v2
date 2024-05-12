@@ -158,8 +158,8 @@ export default function Media({
         <h1 className="font-semibold xl:text-5xl md:text-5xl text-4xl lg:text-4xl pl-4 py-5 lg:pb-8">
           {type === 'movie'
             ? (details as MovieDetails).title
-            : (details as TVDetails).name}{' '}
-          - {type === 'tv' ? `S${season} E${episode}` : ''}
+            : (details as TVDetails).name}
+          {type === 'tv' ? ` - S${season} E${episode}` : ''}
         </h1>
         <div className="flex flex-col gap-5 lg:flex-row justify-between h-full">
           <div className="h-full aspect-video lg:max-w-[70%] flex flex-col">
