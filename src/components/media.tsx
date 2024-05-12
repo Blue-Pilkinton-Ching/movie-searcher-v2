@@ -5,13 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 import SeversSeasons from '@/components/servers-seasons'
 
-import {
-  Media,
-  MovieDetails,
-  SeasonHistory,
-  TVDetails,
-  TVHistory,
-} from '@/../interfaces'
+import { MovieDetails, TVDetails, TVHistory } from '@/../interfaces'
 import Seasons from './seasons'
 import Panel from './panel'
 import Servers from './servers'
@@ -160,92 +154,104 @@ export default function Media({
 
   return (
     <>
-      <div className="flex flex-col gap-5 lg:flex-row lg:h-[calc(100vh-116px-20px)] justify-between py-8">
-        <div className="h-full lg:max-w-[70%] aspect-video *:flex-grow *:w-full *:h-full *:hover:cursor-pointer *:shadow-2xl *:rounded-2xl">
-          {server === 'Vidsrc.to' ? (
-            <iframe
-              src={
-                type === 'movie'
-                  ? `https://vidsrc.to/embed/${type}/${id}`
-                  : `https://vidsrc.to/embed/tv/${id}/${season}/${episode}`
-              }
-              allowFullScreen
-              frameBorder={0}
-              scrolling="no"
-            ></iframe>
-          ) : null}
-          {server === 'Vidsrc.xyz' ? (
-            <iframe
-              src={
-                type === 'movie'
-                  ? `https://vidsrc.xyz/embed/${id}`
-                  : `https://vidsrc.xyz/embed/tv/${id}/${season}-${episode}`
-              }
-              allowFullScreen
-              frameBorder={0}
-              scrolling="no"
-            ></iframe>
-          ) : null}
-          {server === '2embed' ? (
-            <iframe
-              src={
-                type === 'movie'
-                  ? `https://www.2embed.cc/embed/${id}`
-                  : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
-              }
-              allowFullScreen
-              frameBorder={0}
-              scrolling="no"
-            ></iframe>
-          ) : null}
-          {server === 'Free' ? (
-            <iframe
-              src={
-                type === 'movie'
-                  ? `https://www.2embed.cc/embed/${id}`
-                  : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
-              }
-              allowFullScreen
-              sandbox="allow-forms allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-presentation"
-              frameBorder={0}
-              scrolling="no"
-            ></iframe>
-          ) : null}
-        </div>
-        {type === 'tv' ? (
-          <SeversSeasons
-            history={history}
-            type={type}
-            className="lg:block block md:hidden"
-            fetchServer={fetchServer}
-            server={server as Server}
-            seasons={
-              type === 'tv' ? (details as TVDetails).seasons.length : undefined
-            }
-            selectEpisode={selectEpisode}
-            id={id}
-          />
-        ) : (
-          <Panel className="lg:block block md:hidden">
-            <Servers fetchServer={fetchServer} server={server as Server} />
-          </Panel>
-        )}
-
-        <div className="lg:hidden gap-5 hidden md:flex flex-row mb-5">
-          <Panel>
-            <Servers fetchServer={fetchServer} server={server as Server} />
-          </Panel>
+      <div className="w-full flex flex-col lg:h-[calc(100vh-116px-20px)] pb-8">
+        <h1 className="font-semibold xl:text-5xl md:text-5xl text-4xl lg:text-4xl pl-4 py-5 lg:pb-8">
+          {type === 'movie'
+            ? (details as MovieDetails).title
+            : (details as TVDetails).name}{' '}
+          - {type === 'tv' ? `S${season} E${episode}` : ''}
+        </h1>
+        <div className="flex flex-col gap-5 lg:flex-row justify-between h-full">
+          <div className="h-full aspect-video lg:max-w-[70%] flex flex-col">
+            <div className="h-full w-full*:flex-grow *:w-full *:h-full *:hover:cursor-pointer *:shadow-2xl *:rounded-2xl">
+              {server === 'Vidsrc.to' ? (
+                <iframe
+                  src={
+                    type === 'movie'
+                      ? `https://vidsrc.to/embed/${type}/${id}`
+                      : `https://vidsrc.to/embed/tv/${id}/${season}/${episode}`
+                  }
+                  allowFullScreen
+                  frameBorder={0}
+                  scrolling="no"
+                ></iframe>
+              ) : null}
+              {server === 'Vidsrc.xyz' ? (
+                <iframe
+                  src={
+                    type === 'movie'
+                      ? `https://vidsrc.xyz/embed/${id}`
+                      : `https://vidsrc.xyz/embed/tv/${id}/${season}-${episode}`
+                  }
+                  allowFullScreen
+                  frameBorder={0}
+                  scrolling="no"
+                ></iframe>
+              ) : null}
+              {server === '2embed' ? (
+                <iframe
+                  src={
+                    type === 'movie'
+                      ? `https://www.2embed.cc/embed/${id}`
+                      : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
+                  }
+                  allowFullScreen
+                  frameBorder={0}
+                  scrolling="no"
+                ></iframe>
+              ) : null}
+              {server === 'Free' ? (
+                <iframe
+                  src={
+                    type === 'movie'
+                      ? `https://www.2embed.cc/embed/${id}`
+                      : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
+                  }
+                  allowFullScreen
+                  sandbox="allow-forms allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-presentation"
+                  frameBorder={0}
+                  scrolling="no"
+                ></iframe>
+              ) : null}
+            </div>
+          </div>
           {type === 'tv' ? (
-            <Panel>
-              <Seasons
-                history={history}
-                className={`max-h-[600px] overflow-auto`}
-                id={id}
-                selectEpisode={selectEpisode}
-                seasons={(details as TVDetails).seasons.length}
-              />
+            <SeversSeasons
+              history={history}
+              type={type}
+              className="lg:block block md:hidden"
+              fetchServer={fetchServer}
+              server={server as Server}
+              seasons={
+                type === 'tv'
+                  ? (details as TVDetails).seasons.length
+                  : undefined
+              }
+              selectEpisode={selectEpisode}
+              id={id}
+            />
+          ) : (
+            <Panel className="lg:block block md:hidden">
+              <Servers fetchServer={fetchServer} server={server as Server} />
             </Panel>
-          ) : null}
+          )}
+
+          <div className="lg:hidden gap-5 hidden md:flex flex-row mb-5">
+            <Panel>
+              <Servers fetchServer={fetchServer} server={server as Server} />
+            </Panel>
+            {type === 'tv' ? (
+              <Panel>
+                <Seasons
+                  history={history}
+                  className={`max-h-[600px] overflow-auto`}
+                  id={id}
+                  selectEpisode={selectEpisode}
+                  seasons={(details as TVDetails).seasons.length}
+                />
+              </Panel>
+            ) : null}
+          </div>
         </div>
       </div>
     </>
