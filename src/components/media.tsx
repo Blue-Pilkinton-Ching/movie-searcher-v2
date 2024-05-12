@@ -154,12 +154,11 @@ export default function Media({
 
   return (
     <>
-      <div className="w-full flex flex-col lg:h-[calc(100vh-116px-20px)] pb-8">
-        <h1 className="font-semibold xl:text-5xl md:text-5xl text-4xl lg:text-4xl pl-4 py-5 lg:pb-8">
-          {type === 'movie'
-            ? (details as MovieDetails).title
-            : (details as TVDetails).name}
-          {type === 'tv' ? ` - S${season} E${episode}` : ''}
+      <div className="w-full flex flex-col lg:h-[calc(100svh-116px-80px)] pb-8">
+        <h1 className="font-semibold xl:text-5xl md:text-5xl text-3xl text-nowrap overflow-hidden whitespace-nowrap text-ellipsis lg:text-4xl pl-4 min-h-14 md:min-h-16 xl:min-h-20">
+          {type === 'tv'
+            ? `S${season} E${episode} - ${(details as TVDetails).name}`
+            : (details as MovieDetails).title}
         </h1>
         <div className="flex flex-col gap-5 lg:flex-row justify-between h-full">
           <div className="h-full aspect-video lg:max-w-[70%] flex flex-col">
