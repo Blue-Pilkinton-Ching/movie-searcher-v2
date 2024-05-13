@@ -15,6 +15,7 @@ import '@/utils/client/firebase'
 import * as fs from 'firebase/firestore'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { getAuth } from 'firebase/auth'
+import { title } from 'process'
 
 type Server = 'Free' | '2embed' | 'Vidsrc.to' | 'Vidsrc.xyz'
 
@@ -61,7 +62,18 @@ export default function Media({
               ),
               {
                 [id]: {
-                  ...details,
+                  ...(type === 'movie' && {
+                    title: (details as MovieDetails).title,
+                    id: (details as MovieDetails).id,
+                    poster_path: (details as MovieDetails).poster_path,
+                    release_date: (details as MovieDetails).release_date,
+                  }),
+                  ...(type === 'tv' && {
+                    name: (details as TVDetails).name,
+                    id: (details as TVDetails).id,
+                    poster_path: (details as TVDetails).poster_path,
+                    first_air_date: (details as TVDetails).first_air_date,
+                  }),
                   type: type,
                   media_type: type,
                   time_watched: Date.now(),
