@@ -74,7 +74,7 @@ export default function Page() {
             </div>
           </div>
           <p className="text-sm max-w-[350px] py-2 text-neutral-500">
-            The extra servers may create R-18 popups ads. We strongly advise you
+            The extra servers may create NSFW popup ads. We strongly advise you
             install an{' '}
             <Link
               className="text-mainpurple hover:underline"

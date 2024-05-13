@@ -21,6 +21,7 @@ export default function Episodes({
   selectEpisode: (episode: number) => void
 }) {
   const [episodes, setEpisodes] = useState<EpisodeType[]>()
+  const [selectedEpisode, setSelectedEpisode] = useState<number>(1)
 
   useEffect(() => {
     async function fetchSeason() {
@@ -58,17 +59,23 @@ export default function Episodes({
     )
   }
 
+  console.log(selectedEpisode)
+
   return (
     <div>
       {episodes?.map((episode) => (
         <Episode
+          selected={episode.episode_number === selectedEpisode}
           watched={
             history?.episodes.find((x) => x === episode.episode_number) !=
             undefined
           }
           key={episode.episode_number}
           episode={episode}
-          selectEpisode={selectEpisode}
+          selectEpisode={() => {
+            setSelectedEpisode(episode.episode_number)
+            return selectEpisode
+          }}
         />
       ))}
     </div>
