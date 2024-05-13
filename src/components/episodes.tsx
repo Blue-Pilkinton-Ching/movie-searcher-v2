@@ -59,8 +59,6 @@ export default function Episodes({
     )
   }
 
-  console.log(selectedEpisode)
-
   return (
     <div>
       {episodes?.map((episode) => (
@@ -72,9 +70,9 @@ export default function Episodes({
           }
           key={episode.episode_number}
           episode={episode}
-          selectEpisode={() => {
-            setSelectedEpisode(episode.episode_number)
-            return selectEpisode
+          selectEpisode={(episode) => {
+            setSelectedEpisode(episode)
+            selectEpisode(episode)
           }}
         />
       ))}

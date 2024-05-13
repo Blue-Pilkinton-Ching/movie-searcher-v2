@@ -33,6 +33,8 @@ export default function Media({
   const [season, setSeason] = useState(1)
   const [episode, setEpisodeNumber] = useState(1)
 
+  const [historyUndefined, setHistoryUndefined] = useState(false)
+
   const [history, setHistory] = useState<TVHistory>()
 
   const [user] = useAuthState(getAuth())
@@ -74,16 +76,20 @@ export default function Media({
         (async () => {
           try {
             if (type === 'tv') {
-              setHistory(
-                (
-                  await fs.getDoc(
-                    fs.doc(
-                      fs.getFirestore(),
-                      `recent-tv/${user?.uid}/history/${details.id}`
-                    )
+              const history = (
+                await fs.getDoc(
+                  fs.doc(
+                    fs.getFirestore(),
+                    `recent-tv/${user?.uid}/history/${details.id}`
                   )
-                ).data() as TVHistory | undefined
-              )
+                )
+              ).data() as TVHistory | undefined
+
+              if (history == undefined) {
+                setHistoryUndefined(true)
+              } else {
+                setHistory(history)
+              }
             }
           } catch (error) {
             console.error(error)
@@ -93,6 +99,13 @@ export default function Media({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
+
+  useEffect(() => {
+    if (historyUndefined) {
+      selectEpisode(1, 1)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [historyUndefined])
 
   function fetchServer(event: MouseEvent<HTMLButtonElement>, server: string) {
     event.preventDefault()
