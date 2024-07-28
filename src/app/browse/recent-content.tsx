@@ -9,7 +9,7 @@ import { getAuth } from 'firebase/auth'
 import '@/utils/client/firebase'
 
 import * as fs from 'firebase/firestore'
-import { Media, RecentMedia } from '../../../interfaces'
+import { RecentMedia } from '../../../interfaces'
 
 export default function RecentContent() {
   const [user] = useAuthState(getAuth())

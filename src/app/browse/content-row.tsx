@@ -43,8 +43,8 @@ export default function ContentRow({
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold">{name}</h2>
+    <div className="z-50">
+      <h2 className="text-2xl font-bold relative drop-shadow-md">{name}</h2>
       <br />
       <div className="relative group">
         <div
@@ -53,7 +53,7 @@ export default function ContentRow({
         >
           {cards}
         </div>
-        <div className="absolute top-0 w-full h-[285px] my-2 hidden sm:block pointer-events-none">
+        <div className="absolute top-0 w-full h-[285px] my-2 hidden md:block pointer-events-none">
           <div className="relative h-full *:w-9 *:h-full *:absolute hover:*:*:brightness-75 active:*:*:scale-90 *:hover:opacity-100 duration-200 group-hover:opacity-100 *:cursor-pointer opacity-0 *:*:duration-200 *:duration-200 *:pointer-events-auto">
             <button
               onClick={onClickLeft}
