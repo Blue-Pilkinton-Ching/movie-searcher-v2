@@ -179,7 +179,7 @@ export default function Media({
 
   return (
     <>
-      <div className="w-full flex flex-col lg:h-[calc(100svh-116px-80px)] pb-8">
+      <div className="w-full flex flex-col lg:h-[calc(100svh-116px-20px)] pb-8 px-[5%] xl:pt-5 pt-3">
         <h1 className="font-semibold xl:text-5xl md:text-5xl text-3xl text-nowrap overflow-hidden whitespace-nowrap text-ellipsis lg:text-4xl pl-4 min-h-14 md:min-h-16 xl:min-h-20">
           {type === 'tv'
             ? `S${season} E${episode} - ${(details as TVDetails).name}`

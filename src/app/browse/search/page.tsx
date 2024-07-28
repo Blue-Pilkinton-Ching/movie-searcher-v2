@@ -7,7 +7,7 @@ export default async function Page({
   searchParams: { query: string }
 }) {
   return (
-    <main className="w-full relative">
+    <main className="w-full relative px-[5%]">
       <br />
       <Suspense
         fallback={

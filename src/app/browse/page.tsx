@@ -30,7 +30,7 @@ export default async function Page() {
           <div className="w-full h-[90%] flex flex-col items-center"></div>
         </div>
       ) : null}
-      <div className="w-full px-[5%] gradient h-full">
+      <div className="w-full px-[5%] h-full">
         <div className="h-full">
           <Suspense
             fallback={<p className="text-2xl font-bold">Loading content...</p>}
