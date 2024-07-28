@@ -13,9 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         Create new Account
       </Link> */}
-      <p className="text-neutral-500 text-sm">
-        (You won&apos;t receive junk mail, ads or other crap)
-      </p>
+
       <br />
       <Link
         className="flex gap-3 hover:brightness-75 active:scale-95 duration-200"

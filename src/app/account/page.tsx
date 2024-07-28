@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react'
 
 export default function Page() {
   const [user, userLoading] = useAuthState(getAuth())
+  const [loading, setLoading] = useState(true)
   const [showMoreServers, setShowMoreServers] = useState(false)
 
   useEffect(() => {
@@ -31,17 +32,21 @@ export default function Page() {
             } else {
               console.error('Settings not found')
             }
+
+            setLoading(false)
           } catch (error) {
             console.log(error)
           }
         })(),
       ])
+    } else {
+      setLoading(false)
     }
   }, [user])
 
   return (
     <div>
-      {userLoading ? (
+      {userLoading || loading ? (
         <>
           <p>Loading...</p>
           <br />
@@ -70,12 +75,14 @@ export default function Page() {
                   )
                 }}
               />
-              <label htmlFor="showMoreServer">Display more Servers</label>
+              <label htmlFor="showMoreServer">
+                Display more streaming servers
+              </label>
             </div>
           </div>
           <p className="text-sm max-w-[350px] py-2 text-neutral-500">
-            The extra servers may create NSFW popup ads. We strongly advise you
-            install an{' '}
+            The extra servers may create NSFW popup ads. We advise you install
+            an{' '}
             <Link
               className="text-mainpurple hover:underline"
               href={'https://ublockorigin.com/'}
@@ -103,7 +110,8 @@ export default function Page() {
           />
           <p className="text-sm max-w-[350px] py-2">
             Creating an account allows you to view recently watched media, and
-            create movie lists!
+            create movie lists! You also won&apos;t receive junk mail, ads or
+            other crap.
           </p>
         </>
       )}

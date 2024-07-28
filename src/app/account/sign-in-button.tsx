@@ -61,8 +61,6 @@ export default function SignInButton({
         console.error(error)
         return
       }
-
-      router.push('/browse')
     }
   }
 
