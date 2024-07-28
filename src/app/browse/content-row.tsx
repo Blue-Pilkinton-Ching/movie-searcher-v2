@@ -54,10 +54,10 @@ export default function ContentRow({
           {cards}
         </div>
         <div className="absolute top-0 w-full h-[285px] my-2 hidden md:block pointer-events-none">
-          <div className="relative h-full *:w-9 *:h-full *:absolute hover:*:*:brightness-75 active:*:*:scale-90 *:hover:opacity-100 duration-200 group-hover:opacity-100 *:cursor-pointer opacity-0 *:*:duration-200 *:duration-200 *:pointer-events-auto">
+          <div className="relative h-full *:w-[5%] *:h-full *:absolute hover:*:*:brightness-75 active:*:last:*:scale-75 active:*:first:*:-scale-75 *:hover:opacity-100 duration-200 group-hover:opacity-100 *:cursor-pointer opacity-0 *:*:duration-200 *:duration-200 *:pointer-events-auto">
             <button
               onClick={onClickLeft}
-              className="-translate-x-full left-0"
+              className="-translate-x-full flex justify-center items-center"
               style={{
                 cursor: `${
                   row.current?.scrollLeft === 0 ? 'default' : 'pointer'
@@ -65,11 +65,14 @@ export default function ContentRow({
                 opacity: `${row.current?.scrollLeft === 0 ? '0' : '100'}`,
               }}
             >
-              <MdArrowBackIos size={36} className="-translate-y-6" />
+              <MdArrowForwardIos
+                size={52}
+                className="-translate-y-6 -scale-100"
+              />
             </button>
             <button
               onClick={onClickRight}
-              className="translate-x-full right-0 "
+              className="translate-x-full right-0 flex justify-center items-center"
               style={{
                 cursor: `${
                   row.current?.scrollLeft ===
@@ -87,7 +90,7 @@ export default function ContentRow({
                 }`,
               }}
             >
-              <MdArrowForwardIos size={36} className="-translate-y-6" />
+              <MdArrowForwardIos size={52} className="-translate-y-6" />
             </button>
           </div>
         </div>
