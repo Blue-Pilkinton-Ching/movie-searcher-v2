@@ -4,7 +4,6 @@ import RecentContent from './recent-content'
 import TMDBAuthHeader from '@/utils/server/tmdb-header'
 import Image from 'next/image'
 export default async function Page() {
-  const randomIndex = Math.floor(Math.random() * 10) + 1 // pick random between 1 and 10
   const data = (
     await (
       await fetch(`https://api.themoviedb.org/3/movie/popular`, {
@@ -12,7 +11,7 @@ export default async function Page() {
         next: { revalidate: 3600 },
       })
     ).json()
-  ).results[randomIndex]
+  ).results[0]
 
   return (
     <>
