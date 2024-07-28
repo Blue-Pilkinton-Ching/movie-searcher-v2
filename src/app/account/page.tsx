@@ -95,12 +95,11 @@ export default function Page() {
                 </Link>{' '}
                 before using this feature.
               </p>
-              <br />
               <SignInButton
                 provider={'sign out'}
                 text="Sign out"
                 icon={<MdOutlineLogout size={30} />}
-                className="border-none bg-neutral-500/20"
+                className="border-none bg-neutral-500/20 mt-1.5"
               />
             </>
           ) : (
