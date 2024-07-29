@@ -9,8 +9,11 @@ export interface CardProps {
 export function Card({ data }: CardProps) {
   return (
     <Link
+      scroll={false}
       className="relative max-w-[154px] hover:brightness-75 hover:cursor-pointer duration-200 hover:scale-[1.03] active:scale-100"
-      href={`/browse/media/${data.media_type}/${encodeURIComponent(data.id)}`}
+      href={`/browse?view=${encodeURIComponent(data.id)}&media_type=${
+        data.media_type
+      }`}
     >
       <div className={`w-[40vw] max-w-[154px] aspect-[2/3]`}>
         {data.poster_path == null ? (

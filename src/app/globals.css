@@ -73,3 +73,13 @@ html {
     rgba(0, 0, 0, 0) 100%
   );
 }
+
+.fade-image {
+  mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0) 10%,
+    rgba(0, 0, 0, 0.1) 22%,
+    rgba(0, 0, 0, 0.3) 30%,
+    rgba(0, 0, 0, 1) 60%
+  );
+}
