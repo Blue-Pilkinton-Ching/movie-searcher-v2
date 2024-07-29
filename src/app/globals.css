@@ -77,9 +77,11 @@ html {
 .fade-image {
   mask-image: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0) 10%,
-    rgba(0, 0, 0, 0.1) 22%,
-    rgba(0, 0, 0, 0.3) 30%,
-    rgba(0, 0, 0, 1) 60%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.05) 8%,
+    rgba(0, 0, 0, 0.1) 12%,
+    rgba(0, 0, 0, 0.3) 28%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 1) 100%
   );
 }
