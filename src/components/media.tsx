@@ -15,9 +15,8 @@ import '@/utils/client/firebase'
 import * as fs from 'firebase/firestore'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { getAuth } from 'firebase/auth'
-import { title } from 'process'
 
-type Server = 'Free' | '2embed' | 'Vidsrc.to' | 'Vidsrc.xyz'
+type Server = '2embed' | 'Vidsrc.cc' | 'Vidsrc.xyz' | 'Vidsrc.me'
 
 export default function Media({
   type,
@@ -43,7 +42,7 @@ export default function Media({
   const router = useRouter()
 
   useEffect(() => {
-    setServer((params.get('server') as Server | undefined) || 'Vidsrc.to')
+    setServer((params.get('server') as Server | undefined) || 'Vidsrc.cc')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.get])
 
@@ -192,12 +191,12 @@ export default function Media({
         <div className="flex flex-col gap-5 lg:flex-row justify-between h-full">
           <div className="h-full aspect-video lg:max-w-[70%] flex flex-col">
             <div className="h-full w-full*:flex-grow *:w-full *:h-full *:hover:cursor-pointer *:shadow-2xl *:rounded-2xl">
-              {server === 'Vidsrc.to' ? (
+              {server === 'Vidsrc.cc' ? (
                 <iframe
                   src={
                     type === 'movie'
-                      ? `https://vidsrc.to/embed/${type}/${id}`
-                      : `https://vidsrc.to/embed/tv/${id}/${season}/${episode}`
+                      ? `https://vidsrc.cc/v2/embed/${type}/${id}`
+                      : `https://vidsrc.cc/v2/embed/tv/${id}/${season}/${episode}`
                   }
                   allowFullScreen
                   frameBorder={0}
@@ -216,6 +215,18 @@ export default function Media({
                   scrolling="no"
                 ></iframe>
               ) : null}
+              {server === 'Vidsrc.me' ? (
+                <iframe
+                  src={
+                    type === 'movie'
+                      ? `https://vidsrc.me/embed/${id}`
+                      : `https://vidsrc.me/embed/tv/${id}/${season}-${episode}`
+                  }
+                  allowFullScreen
+                  frameBorder={0}
+                  scrolling="no"
+                ></iframe>
+              ) : null}
               {server === '2embed' ? (
                 <iframe
                   src={
@@ -224,19 +235,6 @@ export default function Media({
                       : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
                   }
                   allowFullScreen
-                  frameBorder={0}
-                  scrolling="no"
-                ></iframe>
-              ) : null}
-              {server === 'Free' ? (
-                <iframe
-                  src={
-                    type === 'movie'
-                      ? `https://www.2embed.cc/embed/${id}`
-                      : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
-                  }
-                  allowFullScreen
-                  sandbox="allow-forms allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-presentation"
                   frameBorder={0}
                   scrolling="no"
                 ></iframe>
