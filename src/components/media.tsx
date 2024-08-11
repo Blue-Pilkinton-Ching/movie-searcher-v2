@@ -119,6 +119,10 @@ export default function Media({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [historyUndefined])
 
+  useEffect(() => {
+    router.refresh()
+  }, [params, router])
+
   function fetchServer(event: MouseEvent<HTMLButtonElement>, server: string) {
     event.preventDefault()
     router.push(`/browse/media/${type}/${id}?server=${server}`)
